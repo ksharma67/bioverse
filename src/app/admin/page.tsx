@@ -120,7 +120,7 @@ export default function AdminPanel() {
             <button className={styles.closeButton} onClick={handleCloseModal}>
               X 
             </button> 
-            <h2>{selectedUser}'s Responses</h2> 
+            <h2>{selectedUser} Responses</h2> 
             {userResponses.map((response, index) => (
               <div key={index}>
                 <h3>{response.questionnaireName}</h3>
