@@ -30,6 +30,13 @@ This application allows users to complete questionnaires and provides an admin p
     * Seed the database using the scripts or data in `src/seed_data`.
 4. **Run the development server:** `npm run dev`
 
+## User Credentials
+
+| Role     | Username | Password |
+| -------- | -------- | -------- |
+| User     | user     | user     |
+| Admin    | admin    | admin    | 
+
 ## Database Schema
 
 The database consists of the following tables:

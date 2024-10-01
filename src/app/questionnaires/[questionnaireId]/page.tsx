@@ -193,7 +193,7 @@ function QuestionnaireComponent({ id }: { id: number }) {
         <ul className={styles.questionnaireList}>
           {questions.map((q) => (
             <li key={q.id} className={styles.questionnaireListItem}>
-              <h2>
+              <h2 className={styles.questionText}>
                 Question {q.id} - {q.question.question ? q.question.question : 'No question text available'}
               </h2>
               {q.question.type === 'mcq' && q.question.options && (
