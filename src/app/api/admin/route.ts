@@ -1,9 +1,9 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { pool } from '../../../database/db';
 import type { UserRow } from '../../interfaces/admin';
 import type { QuestionnaireResponse } from '../../interfaces/questionnaire';
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   const client = await pool.connect();
   try {
     // Fetch user summaries with completed questionnaires
