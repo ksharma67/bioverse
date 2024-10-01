@@ -21,7 +21,7 @@ function QuestionnaireComponent({ id }: { id: number }) {
         }
     
         const data: Question[] = await response.json();
-        const questionIdMap = {}; // Store mapping of index to real question ID
+        const questionIdMap: { [key: number]: number } = {}; // Store mapping of index to real question ID
     
         const parsedQuestions = data.map((q, index) => {
           questionIdMap[index] = q.id; // Map index to real question ID
@@ -64,7 +64,11 @@ function QuestionnaireComponent({ id }: { id: number }) {
         }
       } catch (error) {
         console.error('Error fetching questions:', error);
-        setError(`Failed to load questions: ${error.message}`);
+        if (error instanceof Error) {
+          setError(`Failed to load questions: ${error.message}`);
+        } else {
+          setError('Failed to load questions: An unknown error occurred');
+        }
       } finally {
         setIsLoading(false);
       }

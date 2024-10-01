@@ -1,9 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { pool } from '../../../database/db';
 import type { UserRow } from '../../interfaces/admin';
 import type { QuestionnaireResponse } from '../../interfaces/questionnaire';
+// Removed unused import 'UserWithResponses'
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   const client = await pool.connect();
   try {
     // Fetch user summaries with completed questionnaires
@@ -25,7 +26,7 @@ export async function GET(request: NextRequest) {
     }));
 
     // For each user, fetch their responses for each questionnaire
-    const usersWithResponses = await Promise.all(userSummaries.map(async (summary) => {
+    const usersWithResponses = await Promise.all(userSummaries.map(async (summary: { username: string; completedQuestionnaires: number }) => {
       // Fetching the questionnaires completed by the user
       const questionnairesResult = await client.query(`
           SELECT DISTINCT 
@@ -68,9 +69,9 @@ export async function GET(request: NextRequest) {
         `, [questionnaireId, summary.username]);
 
         // Construct the responses
-        const questionsAndAnswers = questionsResult.rows.map((question) => {
+        const questionsAndAnswers = questionsResult.rows.map((question: { question_id: number; question_text: string }) => {
           // Fetch answer for the question based on its ID
-          const answerEntry = answersResult.rows.find(answer => answer.question_id === question.question_id);
+          const answerEntry = answersResult.rows.find((answer: { question_id: number; answer: string }) => answer.question_id === question.question_id);
           
           return {
             question: question.question_text,

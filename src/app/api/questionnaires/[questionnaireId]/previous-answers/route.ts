@@ -34,7 +34,7 @@ export async function GET(request: NextRequest, { params }: { params: { question
         console.log('Query result rows:', result.rows);
 
         // Reduce the result rows into a structured answers object
-        const answers = result.rows.reduce((acc, row) => {
+        const answers = result.rows.reduce((acc: { [key: string]: string | number | boolean }, row: { question_id: string, answer: { answer: string | number | boolean } }) => {
             // Directly access properties without JSON.parse
             acc[row.question_id] = row.answer.answer; // Access answer directly
             return acc;

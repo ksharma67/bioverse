@@ -26,7 +26,7 @@ export default function Questionnaires() {
         setQuestionnaires(data); 
       } catch (error) {
         console.error('Error fetching questionnaires:', error);
-        if (error.message === 'Network response was not ok') {
+        if (error instanceof Error && error.message === 'Network response was not ok') {
           setError('There was a problem connecting to the server. Please check your internet connection and try again.');
         } else {
           setError('An unexpected error occurred. Please try again later.');

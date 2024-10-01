@@ -1,13 +1,14 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { User } from '../interfaces/user';
 import styles from './page.module.css';
 
 export default function AdminPanel() {
-  const [userSummaries, setUserSummaries] = useState([]);
+  const [userSummaries, setUserSummaries] = useState<User[]>([]);
   const [showModal, setShowModal] = useState(false);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [userResponses, setUserResponses] = useState([]);
-  const [questionnaireAnswers, setQuestionnaireAnswers] = useState({});
+  const [selectedUser, setSelectedUser] = useState<string | null>(null);
+  const [userResponses, setUserResponses] = useState<{ questionnaireName: string; questionsAndAnswers: { question: string; question_id: number; }[]; }[]>([]);
+  const [questionnaireAnswers, setQuestionnaireAnswers] = useState<{ [key: number]: string[] }>({});
 
   useEffect(() => {
     const fetchAdminData = async () => {
@@ -27,7 +28,7 @@ export default function AdminPanel() {
     fetchAdminData();
   }, []);
 
-  const handleRowClick = async (user) => {
+  const handleRowClick = async (user: User) => {
     if (user.completedQuestionnaires === 0) {
       return; 
     }
