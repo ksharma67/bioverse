@@ -1,0 +1,31 @@
+.container {
+  @apply flex flex-col items-center justify-center min-h-screen bg-gray-100;
+}
+
+.loginBox {
+  @apply bg-white p-8 rounded shadow-md w-96;
+}
+
+.loginHeader {
+  @apply text-2xl font-bold mb-6 text-center text-black;
+}
+
+.formGroup {
+  @apply mb-4;
+}
+
+.label {
+  @apply block text-gray-700 text-sm font-bold mb-2;
+}
+
+.input {
+  @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.buttonGroup {
+  @apply flex items-center justify-center mt-6; /* Added margin-top for spacing */
+}
+
+.loginButton {
+  @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-700; 
+}
